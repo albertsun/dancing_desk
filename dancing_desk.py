@@ -143,7 +143,11 @@ twitter_client = tweepy.API(twitter_auth)
 
 def tweet(text="The dancing desk is at it again!"):
 	print "tweeting:",text
-	twitter_client.update_status(text)
+	try:
+		twitter_client.update_status(text)
+	except tweepy.error.TweepError:
+		print "tweeting error..."
+		pass
 
 def git_commit():
 	subprocess.Popen(shlex.split("git commit -am 'Dancing out a commit'"), cwd="/Users/204377/Desktop/dancing_desk/")
