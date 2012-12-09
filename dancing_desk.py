@@ -135,13 +135,24 @@ def nice_moves():
 	call(["osascript", "-e", '"set Volume 10"'])
 	call(["say", "-v", 'agnes', "-r", "270", '"nice moves"'])
 
+import json
 import tweepy
 from twitter_credentials import *
 twitter_auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 twitter_auth.set_access_token(OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 twitter_client = tweepy.API(twitter_auth)
 
-def tweet(text="The dancing desk is at it again!"):
+DANCES = json.load(open("dances.json","r"))
+from random import choice
+
+def generate_random_tweet():
+	dance = choice(DANCES)
+	url = "http://en.wikipedia.org/"+str(dance[0])
+	return "We're dancing "+dance[0]+" style! "+url
+
+def tweet(text=""):
+	if text == "":
+		text = generate_random_tweet()
 	print "tweeting:",text
 	try:
 		twitter_client.update_status(text)
