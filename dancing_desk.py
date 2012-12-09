@@ -147,10 +147,11 @@ def tweet(text="The dancing desk is at it again!"):
 
 def git_commit():
 	subprocess.Popen(shlex.split("git commit -am 'Dancing out a commit'"), cwd="/Users/204377/Desktop/dancing_desk/")
-	tweet("The dancing desk just committed! https://github.com/albertsun/dancing_desk/commits/master")
 
 def git_push():
 	subprocess.Popen(shlex.split("git push origin master"), cwd="/Users/204377/Desktop/dancing_desk/")
+	last_commit = subprocess.check_output(shlex.split("git rev-parse HEAD"), cwd="/Users/204377/Desktop/dancing_desk/").strip()
+	tweet("The dancing desk just committed! https://github.com/albertsun/dancing_desk/commit/"+last_commit)
 
 COMMANDS = {
 	"staging_deploy": staging_deploy,
