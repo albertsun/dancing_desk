@@ -127,16 +127,28 @@ def read_event(evt):
 
 import shlex, subprocess
 from subprocess import call,check_output
+
+
 def staging_deploy():
 	call(["open","http://inewsdeploy.prvt.nytimes.com/projects/145/stages/331/deployments/new?task=deploy"])
 def nice_moves():
 	call(["osascript", "-e", '"set Volume 10"'])
 	call(["say", "-v", 'agnes', "-r", "270", '"nice moves"'])
 def git_commit():
-	subprocess.Popen(shlex.split("git commit -am 'dancing desk commit'"), cwd="/Users/204377/Desktop/dancing_desk/")
+	subprocess.Popen(shlex.split("git commit -am 'Dancing out a commit'"), cwd="/Users/204377/Desktop/dancing_desk/")
+	tweet("The dancing desk just committed! https://github.com/albertsun/dancing_desk/commits/master")
 
 def git_push():
 	subprocess.Popen(shlex.split("git push origin master"), cwd="/Users/204377/Desktop/dancing_desk/")
+
+import tweepy
+from twitter_credentials import *
+
+def tweet(text="The dancing desk is at it again!"):
+	auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+	auth.set_access_token(OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+	api = tweepy.API(auth)
+	api.update_status
 
 COMMANDS = {
 	"staging_deploy": staging_deploy,
