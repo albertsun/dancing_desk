@@ -183,7 +183,7 @@ PATTERNS = [
 	[["square","square","square"], "git_commit"],
 	[["o","o","o"], "git_push"],
 	[["select","start"], "staging_deploy"],
-	[["up","up","down","down","left","right","left","right","o","x","start"], "nice_moves"]
+	[["up","up","down","down","left","right","left","right","x","o","start"], "nice_moves"]
 ]
 
 def parse_event_sequence(seq):
