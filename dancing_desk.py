@@ -125,23 +125,33 @@ def read_event(evt):
 			return True
 	return False
 
+import shlex, subprocess
 from subprocess import call,check_output
 def staging_deploy():
 	call(["open","http://inewsdeploy.prvt.nytimes.com/projects/145/stages/331/deployments/new?task=deploy"])
 def nice_moves():
 	call(["osascript", "-e", '"set Volume 10"'])
 	call(["say", "-v", 'agnes', "-r", "270", '"nice moves"'])
+def git_commit():
+	subprocess.Popen(shlex.split("git commit -am 'dancing desk commit'"), cwd="/Users/204377/Desktop/dancing_desk/")
+
+def git_push():
+	subprocess.Popen(shlex.split("git push origin master"), cwd="/Users/204377/Desktop/dancing_desk/")
 
 COMMANDS = {
 	"staging_deploy": staging_deploy,
-	"nice_moves": nice_moves
+	"nice_moves": nice_moves,
+	"git_commit": git_commit,
+	"git_push": git_push
 }
 KEYWORDS = ["up","down","left","right","triangle","o","x","square","select","start"]
 PATTERNS = [
 	[["up", "right", "down", "left"], "squiggle"],
 	[["up"], "up"],
+	[["square","square","square"], "git_commit"],
+	[["o","o","o"], "git_push"],
 	[["select","start"], "staging_deploy"],
-	[["up","down","left","right"], "nice_moves"]
+	[["up","up","down","down","left","right","left","right","o","x","start"], "nice_moves"]
 ]
 
 def parse_event_sequence(seq):
