@@ -1,0 +1,13 @@
+Hook up a DDR pad to your computer and use it to do stuff while you code.
+
+Even better than a standing desk, it's a dancing desk!
+
+
+
+Depends on pygame to read input, latest install instructions are here:
+http://www.pygame.org/install.html
+
+The pad and adapter I was using were http://www.amazon.com/gp/product/B000GF7KAW/
+and http://www.amazon.com/gp/product/B001AATQ0Y/ though I wouldn't recommend that
+adapter for use with a DDR pad if you want to actually play DDR.
+
